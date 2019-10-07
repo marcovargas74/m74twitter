@@ -1,4 +1,4 @@
-package m74twitter
+package main
 
 import (
 	// other imports
@@ -52,33 +52,7 @@ func getClient(creds *Credentials) (*twitter.Client, error) {
 	return client, nil
 }
 
-func sendaTwitter(client *twitter.Client) {
-	tweet, resp, err := client.Statuses.Update("É por isso que gosto do #GO em 5 min tu cria um bot que envia esse twitter", nil)
-	if err != nil {
-		log.Println(err)
-	}
-	log.Printf("%+v\n", resp)
-	log.Printf("%+v\n", tweet)
-}
-
-func findTwitter(client *twitter.Client) {
-	search, resp, err := client.Search.Tweets(&twitter.SearchTweetParams{
-		Query: "#pista_limpa",
-	})
-
-	if err != nil {
-		log.Print(err)
-	}
-
-	for _, tweet := range search.Statuses {
-		fmt.Println(tweet.Text)
-	}
-
-	log.Printf("%+v\n", resp)
-	log.Printf("%+v\n", search)
-}
-
-func conectTwitter() {
+func main() {
 	fmt.Println("Go-Twitter Bot v0.01")
 	creds := Credentials{
 		AccessToken:       os.Getenv("ACCESS_TOKEN"),
@@ -91,6 +65,7 @@ func conectTwitter() {
 	fmt.Printf("TOKEN_SECRET >%+v\n", os.Getenv("ACCESS_TOKEN_SECRET"))
 	fmt.Printf("Consumer >%+v\n", os.Getenv("CONSUMER_KEY"))
 	fmt.Printf("ConsumerSec >%+v\n", os.Getenv("CONSUMER_SECRET"))
+
 	fmt.Printf("%+v\n", creds)
 
 	client, err := getClient(&creds)
@@ -102,5 +77,8 @@ func conectTwitter() {
 	// Print out the pointer to our client
 	// for now so it doesn't throw errors
 	fmt.Printf("%+v\n", client)
+
+	//sendaTwitter(client)
+	m74twitter.findTwitter(client)
 
 }

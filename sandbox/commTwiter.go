@@ -1,5 +1,9 @@
 package main
 
+import "fmt"
+
+/*package main
+
 import (
 	"fmt"
 	"io/ioutil"
@@ -70,4 +74,9 @@ func main() {
 
 	geTwitter()
 
+}
+*/
+
+func main() {
+	fmt.Println("twiiter")
 }
