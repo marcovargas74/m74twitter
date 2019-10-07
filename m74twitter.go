@@ -61,8 +61,9 @@ func sendaTwitter(client *twitter.Client) {
 	log.Printf("%+v\n", tweet)
 }
 
-func findTwitter(client *twitter.Client) {
-	search, resp, err := client.Search.Tweets(&twitter.SearchTweetParams{
+//FindTwitter find a specific twitter
+func FindTwitter(client *twitter.Client) {
+	search, _, err := client.Search.Tweets(&twitter.SearchTweetParams{
 		Query: "#pista_limpa",
 	})
 
@@ -74,8 +75,8 @@ func findTwitter(client *twitter.Client) {
 		fmt.Println(tweet.Text)
 	}
 
-	log.Printf("%+v\n", resp)
-	log.Printf("%+v\n", search)
+	//log.Printf("%+v\n", resp)
+	//log.Printf("%+v\n", search)
 }
 
 func conectTwitter() {

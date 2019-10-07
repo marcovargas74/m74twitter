@@ -8,7 +8,8 @@ import (
 
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
-	//"github.com/dghubble/oauth1"
+	tw "github.com/marcovargas74/m74twitter"
+	rlog "github.com/marcovargas74/rLog"
 )
 
 // Credentials stores all of our access/consumer tokens
@@ -53,6 +54,7 @@ func getClient(creds *Credentials) (*twitter.Client, error) {
 }
 
 func main() {
+	rlog.Clear()
 	fmt.Println("Go-Twitter Bot v0.01")
 	creds := Credentials{
 		AccessToken:       os.Getenv("ACCESS_TOKEN"),
@@ -79,6 +81,6 @@ func main() {
 	fmt.Printf("%+v\n", client)
 
 	//sendaTwitter(client)
-	m74twitter.findTwitter(client)
+	tw.FindTwitter(client)
 
 }
