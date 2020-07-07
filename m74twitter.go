@@ -52,13 +52,16 @@ func getClient(creds *Credentials) (*twitter.Client, error) {
 	return client, nil
 }
 
-func sendaTwitter(client *twitter.Client) {
-	tweet, resp, err := client.Statuses.Update("É por isso que gosto do #GO em 5 min tu cria um bot que envia esse twitter", nil)
+//SendTwitter send a specific twitter with a message
+func SendTwitter(client *twitter.Client, message string) {
+	//tweet, resp, err := client.Statuses.Update("É por isso que gosto do #GO em 5 min tu cria um bot que envia esse twitter", nil)
+	//tweet, resp, err := client.Statuses.Update(message, nil)
+	_, _, err := client.Statuses.Update(message, nil)
 	if err != nil {
 		log.Println(err)
 	}
-	log.Printf("%+v\n", resp)
-	log.Printf("%+v\n", tweet)
+	//log.Printf("%+v\n", resp)
+	//log.Printf("%+v\n", tweet)
 }
 
 //FindTwitter find a specific twitter
@@ -79,7 +82,10 @@ func FindTwitter(client *twitter.Client) {
 	//log.Printf("%+v\n", search)
 }
 
-func conectTwitter() {
+/*
+ */
+//ConectTwitter Connect To a specific twitter
+func ConectTwitter() (*twitter.Client, error) {
 	fmt.Println("Go-Twitter Bot v0.01")
 	creds := Credentials{
 		AccessToken:       os.Getenv("ACCESS_TOKEN"),
@@ -88,20 +94,23 @@ func conectTwitter() {
 		ConsumerSecret:    os.Getenv("CONSUMER_SECRET"),
 	}
 
-	fmt.Printf("TOKEN >%+v\n", os.Getenv("ACCESS_TOKEN"))
+	/*fmt.Printf("TOKEN >%+v\n", os.Getenv("ACCESS_TOKEN"))
 	fmt.Printf("TOKEN_SECRET >%+v\n", os.Getenv("ACCESS_TOKEN_SECRET"))
 	fmt.Printf("Consumer >%+v\n", os.Getenv("CONSUMER_KEY"))
 	fmt.Printf("ConsumerSec >%+v\n", os.Getenv("CONSUMER_SECRET"))
-	fmt.Printf("%+v\n", creds)
+	fmt.Printf("%+v\n", creds)*/
 
 	client, err := getClient(&creds)
 	if err != nil {
 		log.Println("Error getting Twitter Client")
 		log.Println(err)
+		return nil, err
+
 	}
 
 	// Print out the pointer to our client
 	// for now so it doesn't throw errors
-	fmt.Printf("%+v\n", client)
+	//fmt.Printf("%+v\n", client)
+	return client, nil
 
 }
